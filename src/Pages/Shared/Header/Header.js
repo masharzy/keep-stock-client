@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
-    <nav class="navbar navbar-expand-lg navbar-light bg-transparent py-4 fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm py-4 sticky-top">
       <div class="container">
         <Link class="navbar-brand" to="/">
           Keep Stock
