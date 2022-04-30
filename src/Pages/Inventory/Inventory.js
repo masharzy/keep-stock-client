@@ -28,6 +28,24 @@ const Inventory = () => {
         }
       });
   };
+  const handleAddStockQuantity = (e) => {
+      e.preventDefault();
+      const value = parseInt(e.target.quantity.value)
+    axios
+      .put(`http://localhost:5000/item/${id}`, {
+        quantity: parseInt(quantity) + value,
+      })
+      .then((response) => {
+        if (response.data.modifiedCount > 0) {
+            console.log(response);
+          setItemInfo({ ...itemInfo, quantity: parseInt(quantity) + value });
+          toast("Added Successful !!", {
+            type: "success",
+            draggable: true,
+          });
+        }
+      });
+  }
   return (
     <div className="container">
       <div className="row align-items-center">
@@ -71,16 +89,19 @@ const Inventory = () => {
           Delivered
         </button>
         <h3 className="mt-4 mb-3 text-center">Add Stock Quantity</h3>
-        <form className="col-md-4 mx-auto">
+        <form onSubmit={handleAddStockQuantity} className="col-md-4 mx-auto">
           <div class="mb-3">
             <input
               type="number"
               class="form-control"
               placeholder="Quantity"
+              name="quantity"
             />
           </div>
             <input
               type="submit"
+              className="btn btn-success w-100"
+              value="Add Quantity"
             />
         </form>
       </div>
