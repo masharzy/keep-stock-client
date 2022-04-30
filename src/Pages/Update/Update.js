@@ -31,64 +31,64 @@ const Update = () => {
     <div className="col-md-4 mx-auto mt-3">
       <h3 className="text-center mb-3">Update Item</h3>
       <form onSubmit={handleSubmit}>
-        <div class="mb-3">
+        <div className="mb-3">
           <input
             type="text"
-            class="form-control"
+            className="form-control"
             placeholder="Name"
             onChange={(e) => setItemInfo({ ...itemInfo, name: e.target.value })}
           />
         </div>
-        <div class="mb-3">
+        <div className="mb-3">
           <input
             type="number"
-            class="form-control"
+            className="form-control"
             placeholder="Price"
             onChange={(e) =>
               setItemInfo({ ...itemInfo, price: e.target.value })
             }
           />
         </div>
-        <div class="mb-3">
+        <div className="mb-3">
           <input
             type="number"
-            class="form-control"
+            className="form-control"
             placeholder="Quantity"
             onChange={(e) =>
               setItemInfo({ ...itemInfo, quantity: e.target.value })
             }
           />
         </div>
-        <div class="mb-3">
+        <div className="mb-3">
           <textarea
-            class="form-control"
+            className="form-control"
             placeholder="Description"
             onChange={(e) =>
               setItemInfo({ ...itemInfo, description: e.target.value })
             }
           />
         </div>
-        <div class="mb-3">
+        <div className="mb-3">
           <input
             type="text"
-            class="form-control"
+            className="form-control"
             placeholder="Supplier Name"
             onChange={(e) =>
               setItemInfo({ ...itemInfo, supplierName: e.target.value })
             }
           />
         </div>
-        <div class="mb-3">
+        <div className="mb-3">
           <input
             type="text"
-            class="form-control"
+            className="form-control"
             placeholder="Image URL"
             onChange={(e) =>
               setItemInfo({ ...itemInfo, image: e.target.value })
             }
           />
         </div>
-        <button type="submit" class="btn btn-primary w-100">
+        <button type="submit" className="btn btn-primary w-100">
           Submit
         </button>
       </form>

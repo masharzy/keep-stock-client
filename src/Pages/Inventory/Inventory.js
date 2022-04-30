@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const Inventory = () => {
@@ -29,15 +29,14 @@ const Inventory = () => {
       });
   };
   const handleAddStockQuantity = (e) => {
-      e.preventDefault();
-      const value = parseInt(e.target.quantity.value)
+    e.preventDefault();
+    const value = parseInt(e.target.quantity.value);
     axios
       .put(`http://localhost:5000/item/${id}`, {
         quantity: parseInt(quantity) + value,
       })
       .then((response) => {
         if (response.data.modifiedCount > 0) {
-            console.log(response);
           setItemInfo({ ...itemInfo, quantity: parseInt(quantity) + value });
           toast("Added Successful !!", {
             type: "success",
@@ -45,7 +44,7 @@ const Inventory = () => {
           });
         }
       });
-  }
+  };
   return (
     <div className="container">
       <div className="row align-items-center">
@@ -53,7 +52,7 @@ const Inventory = () => {
           <img className="w-100" src={image} alt="" />
         </div>
         <div className="col-md-8">
-          <table class="table table-bordered">
+          <table className="table table-bordered">
             <tbody>
               <tr>
                 <th>ID</th>
@@ -81,28 +80,34 @@ const Inventory = () => {
               </tr>
             </tbody>
           </table>
+          <button
+            className="btn btn-primary"
+            onClick={() => handleDelivered(_id)}
+          >
+            Delivered
+          </button>
+          <Link
+          to='/manageInventories'
+            className="btn btn-primary ms-2"
+          >
+            Manage Inventories
+          </Link>
         </div>
-        <button
-          className="btn btn-primary"
-          onClick={() => handleDelivered(_id)}
-        >
-          Delivered
-        </button>
         <h3 className="mt-4 mb-3 text-center">Add Stock Quantity</h3>
-        <form onSubmit={handleAddStockQuantity} className="col-md-4 mx-auto">
-          <div class="mb-3">
+        <form onSubmit={handleAddStockQuantity} className="col-md-4 mx-auto mb-3">
+          <div className="mb-3">
             <input
               type="number"
-              class="form-control"
+              className="form-control"
               placeholder="Quantity"
               name="quantity"
             />
           </div>
-            <input
-              type="submit"
-              className="btn btn-success w-100"
-              value="Add Quantity"
-            />
+          <input
+            type="submit"
+            className="btn btn-success w-100"
+            value="Add Quantity"
+          />
         </form>
       </div>
     </div>

@@ -1,0 +1,7 @@
+.manageInventories .card:hover{
+    transform: scale(1.01);
+}
+.manageInventories .card{
+    border-radius: 20px;
+    padding: 20px 0;
+}
