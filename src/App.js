@@ -9,6 +9,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ManageInventories from "./Pages/ManageInventories/ManageInventories";
 import AddItem from "./Pages/AddItem/AddItem";
+import Login from "./Pages/Auth/Login/Login";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="/inventory/:id" element={<Inventory />} />
         <Route path="/manageInventories" element={<ManageInventories />} />
         <Route path="/addItem" element={<AddItem />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
       <ToastContainer
         position="top-right"
