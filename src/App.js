@@ -8,6 +8,7 @@ import { ToastContainer } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css";
 import ManageInventories from "./Pages/ManageInventories/ManageInventories";
+import AddItem from "./Pages/AddItem/AddItem";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/update/:id" element={<Update />} />
         <Route path="/inventory/:id" element={<Inventory />} />
         <Route path="/manageInventories" element={<ManageInventories />} />
+        <Route path="/addItem" element={<AddItem />} />
       </Routes>
       <ToastContainer
         position="top-right"
