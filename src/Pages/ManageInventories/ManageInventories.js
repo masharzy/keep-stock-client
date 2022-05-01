@@ -2,7 +2,9 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
+import ManageInventory from "../ManageInventory/ManageInventory";
 import "./ManageInventories.css";
+import ReactLoading from "react-loading";
 
 const ManageInventories = () => {
   const [allItems, setAllItems] = useState([]);
@@ -12,8 +14,6 @@ const ManageInventories = () => {
       .then((response) => setAllItems(response.data));
   }, []);
   const handleDelete = (id) => {
-    console.log(id);
-
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -46,40 +46,21 @@ const ManageInventories = () => {
         </Link>
       </div>
       <div className="row g-4">
+        {allItems.length === 0 ? (
+          <ReactLoading
+            type={"spin"}
+            color="#000"
+            style={{ margin: "0 auto", height: "100px", width: "100px" }}
+          />
+        ) : (
+          ""
+        )}
         {allItems.map((item) => (
-          <div className="col-md-3" key={item._id}>
-            <div className="card h-100">
-              <img src={item.image} alt="" />
-              <div className="card-body">
-                <h4
-                  className="card-title"
-                  style={{ textTransform: "capitalize" }}
-                >
-                  {item.name}
-                </h4>
-                <div className="column d-flex justify-content-between my-3">
-                  <h6 className="card-text">৳{item.price}</h6>
-                  <h6 className="card-text">{item.quantity} Pieces</h6>
-                </div>
-                <p className="card-text">{item.description}</p>
-                <h6 className="card-text">Supplier: {item.supplierName}</h6>
-              </div>
-              <div className="card-footer bg-transparent border-0 d-flex">
-                <button
-                  className="btn btn-danger w-50 me-1"
-                  onClick={() => handleDelete(item._id)}
-                >
-                  Delete
-                </button>
-                <Link
-                  to={`/update/${item._id}`}
-                  className="btn btn-success w-50"
-                >
-                  Update
-                </Link>
-              </div>
-            </div>
-          </div>
+          <ManageInventory
+            handleDelete={handleDelete}
+            key={item._id}
+            item={item}
+          />
         ))}
       </div>
     </div>

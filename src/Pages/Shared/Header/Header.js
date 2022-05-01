@@ -1,9 +1,16 @@
+import { signOut } from "firebase/auth";
 import React from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { Link } from "react-router-dom";
+import auth from "../../../firebase.init";
 
 const Header = () => {
+  const [user] = useAuthState(auth);
+  const handleLogOut = () => {
+    signOut(auth);
+  };
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-white shadow-sm py-4 fixed-top">
+    <nav className="navbar navbar-expand-lg navbar-light bg-white shadow-sm py-4 sticky-top">
       <div className="container">
         <Link className="navbar-brand" to="/">
           Keep Stock
@@ -19,18 +26,49 @@ const Header = () => {
         >
           <span className="navbar-toggler-icon"></span>
         </button>
-        <div className="collapse navbar-collapse" id="navbarNav">
+        <div
+          className="collapse navbar-collapse justify-content-end"
+          id="navbarNav"
+        >
           <ul className="navbar-nav">
             <li className="nav-item">
               <Link className="nav-link" to="/">
                 Home
               </Link>
             </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/login">
-                Login
-              </Link>
-            </li>
+            {user ? (
+              <>
+                <li className="nav-item">
+                  <Link to="/manageInventories" className="nav-link">
+                    Manage Items
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link to="/addItem" className="nav-link">
+                    Add Item
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link to="/myItems" className="nav-link">
+                    My items
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <button
+                    className="nav-link btn btn-primary rounded-pill text-white px-3"
+                    onClick={handleLogOut}
+                  >
+                    Log Out
+                  </button>
+                </li>
+              </>
+            ) : (
+              <li className="nav-item">
+                <Link className="nav-link" to="/login">
+                  Login
+                </Link>
+              </li>
+            )}
           </ul>
         </div>
       </div>

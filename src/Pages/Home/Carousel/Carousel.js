@@ -11,7 +11,7 @@ import "swiper/css/pagination";
 
 const Carousel = () => {
   return (
-    <div className="container" style={{marginTop:"90px"}}>
+    <div className="container" >
       <div className="row">
         <Swiper
           rewind={true}

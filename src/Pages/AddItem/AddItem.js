@@ -1,15 +1,18 @@
 import axios from "axios";
 import React from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
+import auth from "../../firebase.init";
 import "./AddItem.css";
 const AddItem = () => {
+  const [user, loading] = useAuthState(auth);
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm();
-  const onSubmit = async (data) => {
+  const onSubmit = async (data, e) => {
     await axios
       .post("http://localhost:5000/items", {
         name: data.name,
@@ -19,6 +22,7 @@ const AddItem = () => {
         supplierName: data.supplierName,
         // sold: data.sold,
         image: data.image,
+        email: user.email
       })
       .then((response) => {
         if (response.data.insertedId) {
@@ -27,6 +31,7 @@ const AddItem = () => {
             "Your requested item has been added",
             "success"
           );
+          e.target.reset();
         } else {
           Swal.fire("Error!", "Something went wrong", "error");
         }
@@ -44,7 +49,7 @@ const AddItem = () => {
             type="text"
             className="form-control"
             placeholder="Name"
-            {...register("name", { required: true, maxLength: 20 })}
+            {...register("name", { required: true })}
           />
           <h6 className="err">
             {errors.name?.type === "required" && "Name is required"}

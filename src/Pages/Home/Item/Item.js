@@ -21,7 +21,7 @@ const Item = ({ item }) => {
         </div>
         <div className="card-footer bg-transparent border-0">
           <Link to={`/inventory/${_id}`} className="btn btn-primary w-100">
-            Update
+            Manage
           </Link>
         </div>
       </div>

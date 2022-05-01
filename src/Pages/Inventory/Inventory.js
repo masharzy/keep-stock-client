@@ -21,7 +21,7 @@ const Inventory = () => {
       .then((response) => {
         if (response.data.modifiedCount > 0) {
           setItemInfo({ ...itemInfo, quantity: itemInfo.quantity - 1 });
-          toast("Delivered Successful !!", {
+          toast("Successfully Delivered !!", {
             type: "success",
             draggable: true,
           });
