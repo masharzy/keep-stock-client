@@ -11,6 +11,7 @@ import AddItem from "./Pages/AddItem/AddItem";
 import Login from "./Pages/Auth/Login/Login";
 import RequireAuth from "./Pages/Auth/RequireAuth/RequireAuth";
 import MyItems from "./Pages/MyItems/MyItems";
+import Footer from "./Pages/Shared/Footer/Footer";
 
 function App() {
   return (
@@ -60,6 +61,7 @@ function App() {
           }
         />
       </Routes>
+      <Footer/>
       <ToastContainer
         position="top-right"
         autoClose={5000}
