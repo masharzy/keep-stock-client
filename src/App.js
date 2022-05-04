@@ -13,6 +13,7 @@ import Register from "./Pages/Auth/Register/Register";
 import RequireAuth from "./Pages/Auth/RequireAuth/RequireAuth";
 import MyItems from "./Pages/MyItems/MyItems";
 import Footer from "./Pages/Shared/Footer/Footer";
+import ResetPassword from "./Pages/Auth/ResetPassword/ResetPassword";
 
 function App() {
   return (
@@ -54,7 +55,7 @@ function App() {
         />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/forgotPassword" element={<Register />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
         <Route
           path="/myItems"
           element={
