@@ -12,7 +12,6 @@ import { toast } from "react-toastify";
 import auth from "../../../firebase.init";
 import googleImg from "../../../images/Google.svg";
 import registerImg from "../../../images/register.png";
-import Loading from "../../Shared/Loading/Loading";
 import "./Register.css";
 
 const Register = () => {
@@ -27,7 +26,6 @@ const Register = () => {
     handleSubmit,
   } = useForm();
 
-  console.log(errors);
   const onSubmit = async (data) => {
     await createUserWithEmailAndPassword(data.email, data.password);
   };
