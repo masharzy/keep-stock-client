@@ -12,4 +12,12 @@
     margin-right: 10px;
     font-size: 20px;
     cursor: pointer;
+    transition: .5s;
+}
+.footer .icons svg:hover{
+    transform: scale(1.2);
+}
+.copyright-area{
+    padding: 20px 0;
+    text-align: center;
 }

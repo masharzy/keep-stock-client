@@ -13,8 +13,8 @@ import "./Footer.css";
 
 const Footer = () => {
   return (
-    <div className="footer text-white container-fluid py-5">
-      <div className="container">
+    <div className="footer text-white container-fluid mt-3 bottom-0">
+      <div className="container py-5">
         <div className="row">
           <div className="col-md-5">
             <ul className="list-unstyled">
@@ -57,6 +57,9 @@ const Footer = () => {
             <img src={payWith} alt="" />
           </div>
         </div>
+      </div>
+      <div className="col-12 copyright-area">
+        <p className="text-center">Copyright © 2022 Mahdy Abrar Sharzy</p>
       </div>
     </div>
   );

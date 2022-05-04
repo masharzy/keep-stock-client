@@ -9,6 +9,7 @@ import "react-toastify/dist/ReactToastify.css";
 import ManageInventories from "./Pages/ManageInventories/ManageInventories";
 import AddItem from "./Pages/AddItem/AddItem";
 import Login from "./Pages/Auth/Login/Login";
+import Register from "./Pages/Auth/Register/Register";
 import RequireAuth from "./Pages/Auth/RequireAuth/RequireAuth";
 import MyItems from "./Pages/MyItems/MyItems";
 import Footer from "./Pages/Shared/Footer/Footer";
@@ -52,6 +53,7 @@ function App() {
           }
         />
         <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
         <Route
           path="/myItems"
           element={

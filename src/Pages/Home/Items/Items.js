@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Item from "../Item/Item";
-import ReactLoading from "react-loading";
+import Loading from "../../Shared/Loading/Loading";
 
 const Items = () => {
   const [items, setItems] = useState([]);
@@ -14,11 +14,7 @@ const Items = () => {
   return (
     <div className="row row-cols-1 row-cols-md-3 g-4">
       {items.length === 0 ? (
-        <ReactLoading
-          type={"spin"}
-          color="#000"
-          style={{ margin: "0 auto", height: "100px", width: "100px" }}
-        />
+       <Loading/>
       ) : (
         ""
       )}

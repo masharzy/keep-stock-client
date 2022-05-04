@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import ManageInventory from "../ManageInventory/ManageInventory";
 import "./ManageInventories.css";
-import ReactLoading from "react-loading";
+import Loading from "../Shared/Loading/Loading";
 
 const ManageInventories = () => {
   const [allItems, setAllItems] = useState([]);
@@ -47,11 +47,7 @@ const ManageInventories = () => {
       </div>
       <div className="row g-4">
         {allItems.length === 0 ? (
-          <ReactLoading
-            type={"spin"}
-            color="#000"
-            style={{ margin: "0 auto", height: "100px", width: "100px" }}
-          />
+          <Loading/>
         ) : (
           ""
         )}

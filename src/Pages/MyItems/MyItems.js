@@ -4,6 +4,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
 import ReactLoading from "react-loading";
 import MyItem from "../MyItem/MyItem";
+import Loading from "../Shared/Loading/Loading";
 
 const MyItems = () => {
   const [myItems, setMyItems] = useState([]);
@@ -19,11 +20,7 @@ const MyItems = () => {
       <h1 className="text-center my-3">My Items</h1>
       <div className="row row-cols-1 row-cols-md-3 g-4">
         {myItems.length === 0 ? (
-          <ReactLoading
-            type={"spin"}
-            color="#000"
-            style={{ margin: "0 auto", height: "100px", width: "100px" }}
-          />
+          <Loading/>
         ) : (
           ""
         )}

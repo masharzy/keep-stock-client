@@ -1,26 +1,23 @@
-// import axios from "axios";
-import React, { useEffect } from "react";
-import { useForm } from "react-hook-form";
-// import Swal from "sweetalert2";
-import loginImg from "../../../images/login.webp";
-import "./Login.css";
+import { faEnvelope, faLock, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
-import { faLock } from "@fortawesome/free-solid-svg-icons";
-import googleImg from "../../../images/Google.svg";
+import React, { useEffect } from "react";
 import {
   useAuthState,
-  useSignInWithEmailAndPassword,
+  useCreateUserWithEmailAndPassword,
   useSignInWithGoogle,
 } from "react-firebase-hooks/auth";
-import auth from "../../../firebase.init";
-import { toast } from "react-toastify";
+import { useForm } from "react-hook-form";
 import { useLocation, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import auth from "../../../firebase.init";
+import googleImg from "../../../images/Google.svg";
+import registerImg from "../../../images/register.png";
 import Loading from "../../Shared/Loading/Loading";
+import "./Register.css";
 
-const Login = () => {
-  const [signInWithEmailAndPassword, emailUser, emailLoading, emailError] =
-    useSignInWithEmailAndPassword(auth);
+const Register = () => {
+  const [createUserWithEmailAndPassword, emailUser, emailLoading, emailError] =
+    useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
   const [signInWithGoogle, googleUser, googleLoading, googleError] =
     useSignInWithGoogle(auth);
   const [user] = useAuthState(auth);
@@ -29,8 +26,10 @@ const Login = () => {
     formState: { errors },
     handleSubmit,
   } = useForm();
+
+  console.log(errors);
   const onSubmit = async (data) => {
-    await signInWithEmailAndPassword(data.email, data.password);
+    await createUserWithEmailAndPassword(data.email, data.password);
   };
 
   useEffect(() => {
@@ -53,30 +52,47 @@ const Login = () => {
       toast.error(newErrorMessage);
     }
   }, [emailError, googleError]);
+
   const location = useLocation();
   const from = location.state?.from || { pathname: "/" };
   const navigate = useNavigate();
   if (user) {
     navigate(from);
   }
+
   return (
-    <div className="container-fluid bg-dark login-container">
+    <div className="container-fluid bg-dark register-container">
       <div className="row">
-        <div className="login-wrapper">
-          <div className="login-img d-none d-lg-block">
-            <img className="w-100" src={loginImg} alt="" />
+        <div className="register-wrapper">
+          <div className="register-img d-none d-lg-block">
+            <img className="w-100" src={registerImg} alt="" />
           </div>
           <form
             onSubmit={handleSubmit(onSubmit)}
-            className="login-form col-sm-12"
+            className="register-form col-sm-12"
           >
-            <h1 className="text-center title">Login</h1>
+            <h1 className="text-center title">Register</h1>
 
-            <div className="login-input">
+            <div className="register-input">
+              <input
+                type="text"
+                placeholder="Name"
+                {...register("name", { required: true, maxLength: 20 })}
+              />
+              <div className="icon">
+                <FontAwesomeIcon icon={faUser} />
+              </div>
+            </div>
+            <h6 className="err ms-3 mt-2">
+              {errors.name?.type === "required" && "Name is required"}
+              {errors.name?.type === "maxLength" && "Name can not be greater than 20 characters"}
+            </h6>
+
+            <div className="register-input">
               <input
                 type="email"
                 placeholder="Email"
-                {...register("email", { required: true })}
+                {...register("email", { required: true})}
               />
               <div className="icon">
                 <FontAwesomeIcon icon={faEnvelope} />
@@ -85,7 +101,7 @@ const Login = () => {
             <h6 className="err ms-3 mt-2">
               {errors.email?.type === "required" && "Email is required"}
             </h6>
-            <div className="login-input">
+            <div className="register-input">
               <input
                 type="password"
                 placeholder="Password"
@@ -101,7 +117,7 @@ const Login = () => {
                 "Password must be greater than 6 characters"}
             </h6>
             {emailLoading ? (
-              <button className="btn w-100 login-btn" disabled>
+              <button className="btn w-100 register-btn" disabled>
                 <span
                   class="spinner-border spinner-border-sm"
                   role="status"
@@ -110,8 +126,8 @@ const Login = () => {
                 &nbsp; Loading...
               </button>
             ) : (
-              <button type="submit" className="btn w-100 login-btn">
-                Login
+              <button type="submit" className="btn w-100 register-btn">
+                Register
               </button>
             )}
             <div className="bottom-border">
@@ -151,4 +167,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;
