@@ -15,17 +15,7 @@ const Update = () => {
   });
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await axios
-      .put(`http://localhost:5000/item/${id}`, {
-        name: itemInfo.name,
-        price: itemInfo.price,
-        quantity: itemInfo.quantity,
-        description: itemInfo.description,
-        supplierName: itemInfo.supplierName,
-        // sold: itemInfo.sold,
-        image: itemInfo.image,
-      })
-      .then((response) => console.log(response));
+    await axios.put(`http://localhost:5000/item/${id}`, itemInfo);
   };
   return (
     <div className="col-md-4 mx-auto mt-3">

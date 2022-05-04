@@ -14,6 +14,8 @@ import RequireAuth from "./Pages/Auth/RequireAuth/RequireAuth";
 import MyItems from "./Pages/MyItems/MyItems";
 import Footer from "./Pages/Shared/Footer/Footer";
 import ResetPassword from "./Pages/Auth/ResetPassword/ResetPassword";
+import NotFound from "./Pages/Shared/NotFound/NotFound";
+import Loading from "./Pages/Shared/Loading/Loading";
 
 function App() {
   return (
@@ -64,8 +66,10 @@ function App() {
             </RequireAuth>
           }
         />
+        <Route path="*" element={<NotFound />} />
+        <Route path="/loading" element={<Loading />} />
       </Routes>
-      <Footer/>
+      <Footer />
       <ToastContainer
         position="top-right"
         autoClose={5000}

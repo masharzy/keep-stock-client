@@ -2,7 +2,6 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
-import ReactLoading from "react-loading";
 import MyItem from "../MyItem/MyItem";
 import Loading from "../Shared/Loading/Loading";
 
