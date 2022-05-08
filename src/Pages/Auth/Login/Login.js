@@ -1,16 +1,16 @@
 // import axios from "axios";
 import {
-  faArrowRight,
-  faEnvelope,
-  faLock,
+    faArrowRight,
+    faEnvelope,
+    faLock
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import React, { useEffect } from "react";
 import {
-  useAuthState,
-  useSignInWithEmailAndPassword,
-  useSignInWithGoogle,
+    useAuthState,
+    useSignInWithEmailAndPassword,
+    useSignInWithGoogle
 } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -39,7 +39,7 @@ const Login = () => {
     const { email, password } = data;
     await signInWithEmailAndPassword(email, password);
     await axios
-      .post("http://localhost:5000/login", { email })
+      .post("https://keep-stock-server.herokuapp.com/login", { email })
       .then((response) => {
         if (response.data.token) {
           localStorage.setItem("token", response.data.token);

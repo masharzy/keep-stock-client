@@ -8,7 +8,7 @@ const Update = () => {
   const [item, setItem] = useState({});
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/item/${id}`)
+      .get(`https://keep-stock-server.herokuapp.com/item/${id}`)
       .then((response) => setItem(response.data));
   }, [id]);
   const { name, price, quantity, description, supplierName, image } = item;
@@ -28,7 +28,7 @@ const Update = () => {
       supplierName,
       image,
     };
-    axios.put(`http://localhost:5000/item/${id}`, itemInfo).then((response) => {
+    axios.put(`https://keep-stock-server.herokuapp.com/item/${id}`, itemInfo).then((response) => {
       if (response.data.modifiedCount > 0) {
         Swal.fire("Item Updated", "Your item has been updated", "success");
       } else {

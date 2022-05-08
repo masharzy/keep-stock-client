@@ -8,14 +8,14 @@ const Inventory = () => {
   const [itemInfo, setItemInfo] = useState([]);
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/item/${id}`)
+      .get(`https://keep-stock-server.herokuapp.com/item/${id}`)
       .then((response) => setItemInfo(response.data));
   }, [id]);
   const { image, name, price, quantity, description, supplierName, _id } =
     itemInfo;
   const handleDelivered = async () => {
     await axios
-      .put(`http://localhost:5000/item/${id}`, {
+      .put(`https://keep-stock-server.herokuapp.com/item/${id}`, {
         quantity: itemInfo.quantity - 1,
       })
       .then((response) => {
@@ -32,7 +32,7 @@ const Inventory = () => {
     e.preventDefault();
     const value = parseInt(e.target.quantity.value);
     axios
-      .put(`http://localhost:5000/item/${id}`, {
+      .put(`https://keep-stock-server.herokuapp.com/item/${id}`, {
         quantity: parseInt(quantity) + value,
       })
       .then((response) => {

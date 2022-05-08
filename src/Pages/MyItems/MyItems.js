@@ -2,11 +2,12 @@ import axios from "axios";
 import { signOut } from "firebase/auth";
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import auth from "../../firebase.init";
 import MyItem from "../MyItem/MyItem";
 import Loading from "../Shared/Loading/Loading";
+import emptyStock from "../../images/empty-stock.png"
 
 const MyItems = () => {
   const [myItems, setMyItems] = useState([]);
@@ -18,7 +19,7 @@ const MyItems = () => {
     const getMyItems = async () => {
       try {
         const { data } = await axios.get(
-          `http://localhost:5000/items/${email}`,
+          `https://keep-stock-server.herokuapp.com/items/${email}`,
           {
             headers: {
               authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -49,7 +50,7 @@ const MyItems = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         await axios
-          .delete(`http://localhost:5000/item/${id}`)
+          .delete(`https://keep-stock-server.herokuapp.com/item/${id}`)
           .then((response) => {
             if (response.data.deletedCount > 0) {
               setMyItems(myItems.filter((item) => item._id !== id));
@@ -63,10 +64,23 @@ const MyItems = () => {
   };
 
   return (
-    <div className="container my-3">
+    <div className="container my-5">
       <h1 className="text-center my-3">My Items</h1>
+      {myItems.length === 0 ? (
+        <div className="row my-5 py-5">
+          <img className="w-25 mx-auto" src={emptyStock} alt="" />
+          <h4 className="mt-4 text-center">
+            You don't have any items yet{" "}
+            <Link to="/addItem" className="btn">
+              Add Item
+            </Link>
+            First
+          </h4>
+        </div>
+      ) : (
+        ""
+      )}
       <div className="row row-cols-1 row-cols-md-3 g-4">
-        {myItems.length === 0 ? <Loading /> : ""}
         {myItems.map((item) => (
           <MyItem handleDelete={handleDelete} key={item._id} item={item} />
         ))}

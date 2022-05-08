@@ -1,10 +1,10 @@
 import axios from "axios";
 import React from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
-import "./AddItem.css";
-import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
+import "./AddItem.css";
 const AddItem = () => {
   const {
     register,
@@ -13,7 +13,7 @@ const AddItem = () => {
   } = useForm();
   const [user] = useAuthState(auth);
   const onSubmit = async (data, e) => {
-    await axios.post("http://localhost:5000/items", {
+    await axios.post("https://keep-stock-server.herokuapp.com/items", {
       name: data.name,
       price: data.price,
       quantity: data.quantity,

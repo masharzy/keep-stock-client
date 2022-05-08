@@ -3,14 +3,14 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import ManageInventory from "../ManageInventory/ManageInventory";
-import "./ManageInventories.css";
 import Loading from "../Shared/Loading/Loading";
+import "./ManageInventories.css";
 
 const ManageInventories = () => {
   const [allItems, setAllItems] = useState([]);
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/items`)
+      .get(`https://keep-stock-server.herokuapp.com/items`)
       .then((response) => setAllItems(response.data));
   }, []);
   const handleDelete = (id) => {
@@ -25,7 +25,7 @@ const ManageInventories = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         await axios
-          .delete(`http://localhost:5000/item/${id}`)
+          .delete(`https://keep-stock-server.herokuapp.com/item/${id}`)
           .then((response) => {
             if (response.data.deletedCount > 0) {
               setAllItems(allItems.filter((item) => item._id !== id));

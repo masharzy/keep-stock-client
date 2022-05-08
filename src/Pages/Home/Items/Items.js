@@ -1,12 +1,12 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import Item from "../Item/Item";
 import Loading from "../../Shared/Loading/Loading";
+import Item from "../Item/Item";
 
 const Items = () => {
   const [items, setItems] = useState([]);
   useEffect(() => {
-    axios.get("http://localhost:5000/items").then((response) =>
+    axios.get("https://keep-stock-server.herokuapp.com/items").then((response) =>
       setItems(response.data)
     );
   }, []);
