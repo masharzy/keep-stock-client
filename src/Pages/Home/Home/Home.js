@@ -4,11 +4,13 @@ import Items from "../Items/Items";
 import Testimonial from "../Testimonial/Testimonial";
 import OurSpecialty from "../OurSpecialty/OurSpecialty";
 import { Link } from "react-router-dom";
+import ExploreSolutions from "../ExploreSolutions/ExploreSolutions";
 
 const Home = () => {
   return (
     <div>
       <Carousel />
+      <ExploreSolutions/>
       <div className="container">
         <h1 className="text-center my-5">ITEMS</h1>
         <Items />
