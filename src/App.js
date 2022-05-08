@@ -16,6 +16,7 @@ import Footer from "./Pages/Shared/Footer/Footer";
 import ResetPassword from "./Pages/Auth/ResetPassword/ResetPassword";
 import NotFound from "./Pages/Shared/NotFound/NotFound";
 import Blogs from "./Pages/Blogs/Blogs";
+import AboutUs from "./Pages/AboutUs/AboutUs";
 
 function App() {
   return (
@@ -67,6 +68,7 @@ function App() {
           }
         />
         <Route path="/blogs" element={<Blogs />} />
+        <Route path="/about-us" element={<AboutUs />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />

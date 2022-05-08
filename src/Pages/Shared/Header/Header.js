@@ -36,11 +36,6 @@ const Header = () => {
                 Home
               </Link>
             </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/blogs">
-                Blogs
-              </Link>
-            </li>
             {user ? (
               <>
                 <li className="nav-item">
@@ -59,6 +54,16 @@ const Header = () => {
                   </Link>
                 </li>
                 <li className="nav-item">
+                  <Link className="nav-link" to="/blogs">
+                    Blogs
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link" to="/about-us">
+                    About Us
+                  </Link>
+                </li>
+                <li className="nav-item">
                   <button
                     className="nav-link btn btn-primary rounded-pill text-white px-3"
                     onClick={handleLogOut}
@@ -69,6 +74,16 @@ const Header = () => {
               </>
             ) : (
               <>
+                <li className="nav-item">
+                  <Link className="nav-link" to="/blogs">
+                    Blogs
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link" to="/about-us">
+                    About Us
+                  </Link>
+                </li>
                 <li className="nav-item">
                   <Link className="nav-link" to="/login">
                     Login
@@ -84,11 +99,6 @@ const Header = () => {
           </ul>
         </div>
       </div>
-
-
-
-
-
     </nav>
   );
 };
