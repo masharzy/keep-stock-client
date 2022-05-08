@@ -36,6 +36,11 @@ const Header = () => {
                 Home
               </Link>
             </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/blogs">
+                Blogs
+              </Link>
+            </li>
             {user ? (
               <>
                 <li className="nav-item">

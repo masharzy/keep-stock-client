@@ -3,14 +3,25 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import "./AddItem.css";
+import { useAuthState } from "react-firebase-hooks/auth";
+import auth from "../../firebase.init";
 const AddItem = () => {
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm();
+  const [user] = useAuthState(auth);
   const onSubmit = async (data, e) => {
-    await axios.post("http://localhost:5000/items", data).then((response) => {
+    await axios.post("http://localhost:5000/items", {
+      name: data.name,
+      price: data.price,
+      quantity: data.quantity,
+      description: data.description,
+      supplierName: data.supplierName,
+      image: data.image,
+      email: user.email
+    }).then((response) => {
       if (response.data.insertedId) {
         Swal.fire(
           "Item Added",

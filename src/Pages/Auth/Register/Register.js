@@ -2,12 +2,12 @@ import { faEnvelope, faLock, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect } from "react";
 import {
-  useAuthState,
-  useCreateUserWithEmailAndPassword,
-  useSignInWithGoogle,
+    useAuthState,
+    useCreateUserWithEmailAndPassword,
+    useSignInWithGoogle
 } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import auth from "../../../firebase.init";
 import googleImg from "../../../images/Google.svg";
@@ -83,14 +83,15 @@ const Register = () => {
             </div>
             <h6 className="err ms-3 mt-2">
               {errors.name?.type === "required" && "Name is required"}
-              {errors.name?.type === "maxLength" && "Name can not be greater than 20 characters"}
+              {errors.name?.type === "maxLength" &&
+                "Name can not be greater than 20 characters"}
             </h6>
 
             <div className="register-input">
               <input
                 type="email"
                 placeholder="Email"
-                {...register("email", { required: true})}
+                {...register("email", { required: true })}
               />
               <div className="icon">
                 <FontAwesomeIcon icon={faEnvelope} />
@@ -117,7 +118,7 @@ const Register = () => {
             {emailLoading ? (
               <button className="btn w-100 register-btn" disabled>
                 <span
-                  class="spinner-border spinner-border-sm"
+                  className="spinner-border spinner-border-sm"
                   role="status"
                   aria-hidden="true"
                 ></span>
@@ -141,7 +142,7 @@ const Register = () => {
               >
                 <div className="btn google-login-btn">
                   <span
-                    class="spinner-border spinner-border-sm"
+                    className="spinner-border spinner-border-sm"
                     role="status"
                     aria-hidden="true"
                   ></span>
@@ -158,6 +159,12 @@ const Register = () => {
                 </div>
               </div>
             )}
+            <Link
+              to="/login"
+              className="text-dark text-decoration-none fw-bold mt-3 d-block text-center"
+            >
+              Already have an Account? <span style={{color:" #2ecc71"}}>Login</span>
+            </Link>
           </form>
         </div>
       </div>

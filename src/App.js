@@ -15,7 +15,7 @@ import MyItems from "./Pages/MyItems/MyItems";
 import Footer from "./Pages/Shared/Footer/Footer";
 import ResetPassword from "./Pages/Auth/ResetPassword/ResetPassword";
 import NotFound from "./Pages/Shared/NotFound/NotFound";
-import Loading from "./Pages/Shared/Loading/Loading";
+import Blogs from "./Pages/Blogs/Blogs";
 
 function App() {
   return (
@@ -66,8 +66,8 @@ function App() {
             </RequireAuth>
           }
         />
+        <Route path="/blogs" element={<Blogs />} />
         <Route path="*" element={<NotFound />} />
-        <Route path="/loading" element={<Loading />} />
       </Routes>
       <Footer />
       <ToastContainer

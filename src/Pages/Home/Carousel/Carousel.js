@@ -14,7 +14,7 @@ const Carousel = () => {
     <div className="container" >
       <div className="row">
         <Swiper
-          rewind={true}
+          loop={true}
           centeredSlides={true}
           autoplay={{
             delay: 2500,
@@ -25,7 +25,6 @@ const Carousel = () => {
           }}
           navigation={true}
           modules={[Autoplay, Pagination, Navigation]}
-          // className="container"
         >
           <SwiperSlide>
             <div className="col-md-6">

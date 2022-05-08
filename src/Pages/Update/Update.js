@@ -1,32 +1,53 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const Update = () => {
   const { id } = useParams();
-  const [itemInfo, setItemInfo] = useState({
-    name: "",
-    price: 0,
-    quantity: 0,
-    description: "",
-    supplierName: "",
-    // sold: "",
-    image: "",
-  });
-  const handleSubmit = async (e) => {
+  const [item, setItem] = useState({});
+  useEffect(() => {
+    axios
+      .get(`http://localhost:5000/item/${id}`)
+      .then((response) => setItem(response.data));
+  }, [id]);
+  const { name, price, quantity, description, supplierName, image } = item;
+  const handleSubmit = (e) => {
     e.preventDefault();
-    await axios.put(`http://localhost:5000/item/${id}`, itemInfo);
+    const name = e.target.name.value;
+    const price = e.target.price.value;
+    const quantity = e.target.quantity.value;
+    const description = e.target.description.value;
+    const supplierName = e.target.supplierName.value;
+    const image = e.target.image.value;
+    const itemInfo = {
+      name,
+      price,
+      quantity,
+      description,
+      supplierName,
+      image,
+    };
+    axios.put(`http://localhost:5000/item/${id}`, itemInfo).then((response) => {
+      if (response.data.modifiedCount > 0) {
+        Swal.fire("Item Updated", "Your item has been updated", "success");
+      } else {
+        Swal.fire("Error!", "Something went wrong", "error");
+      }
+    });
   };
   return (
     <div className="col-md-4 mx-auto mt-3">
-      <h3 className="text-center mb-3">Update Item</h3>
+      <h3 className="text-center mb-3">Edit Item</h3>
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
           <input
             type="text"
             className="form-control"
             placeholder="Name"
-            onChange={(e) => setItemInfo({ ...itemInfo, name: e.target.value })}
+            defaultValue={name}
+            name="name"
+            required
           />
         </div>
         <div className="mb-3">
@@ -34,9 +55,9 @@ const Update = () => {
             type="number"
             className="form-control"
             placeholder="Price"
-            onChange={(e) =>
-              setItemInfo({ ...itemInfo, price: e.target.value })
-            }
+            defaultValue={price}
+            name="price"
+            required
           />
         </div>
         <div className="mb-3">
@@ -44,18 +65,18 @@ const Update = () => {
             type="number"
             className="form-control"
             placeholder="Quantity"
-            onChange={(e) =>
-              setItemInfo({ ...itemInfo, quantity: e.target.value })
-            }
+            defaultValue={quantity}
+            name="quantity"
+            required
           />
         </div>
         <div className="mb-3">
           <textarea
             className="form-control"
             placeholder="Description"
-            onChange={(e) =>
-              setItemInfo({ ...itemInfo, description: e.target.value })
-            }
+            defaultValue={description}
+            name="description"
+            required
           />
         </div>
         <div className="mb-3">
@@ -63,9 +84,9 @@ const Update = () => {
             type="text"
             className="form-control"
             placeholder="Supplier Name"
-            onChange={(e) =>
-              setItemInfo({ ...itemInfo, supplierName: e.target.value })
-            }
+            defaultValue={supplierName}
+            name="supplierName"
+            required
           />
         </div>
         <div className="mb-3">
@@ -73,9 +94,9 @@ const Update = () => {
             type="text"
             className="form-control"
             placeholder="Image URL"
-            onChange={(e) =>
-              setItemInfo({ ...itemInfo, image: e.target.value })
-            }
+            defaultValue={image}
+            name="image"
+            required
           />
         </div>
         <button type="submit" className="btn btn-primary w-100">

@@ -1,23 +1,33 @@
-.footer{
-    background-color: #22202C;
+.footer {
+  background-color: #22202c;
+  
 }
-.footer a{
-    text-decoration: none;
-    color: #fff;
+.footer a {
+  text-decoration: none;
+  color: #fff;
 }
 .footer li {
-    margin: 10px 0;
+  margin: 10px 0;
 }
-.footer .icons svg{
-    margin-right: 10px;
-    font-size: 20px;
-    cursor: pointer;
-    transition: .5s;
+.footer .icons svg {
+  margin-right: 10px;
+  font-size: 20px;
+  cursor: pointer;
+  transition: 0.5s;
 }
-.footer .icons svg:hover{
-    transform: scale(1.2);
+.footer .icons svg:hover {
+  transform: scale(1.2);
 }
-.copyright-area{
-    padding: 20px 0;
-    text-align: center;
+.copyright-area {
+  padding: 20px 0;
+  text-align: center;
+}
+.footer .subscribe-field{
+  position: relative;
+}
+.footer .subscribe-field .btn {
+  position: absolute;
+  right: 0;
+  border-top-right-radius: 50px;
+  border-bottom-right-radius: 50px;
 }

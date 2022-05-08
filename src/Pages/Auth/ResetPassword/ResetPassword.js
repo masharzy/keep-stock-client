@@ -1,14 +1,14 @@
-import React, { useEffect } from "react";
-import { useForm } from "react-hook-form";
-import "./ResetPassword.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React from "react";
 import {
-  useAuthState,
-  useSendPasswordResetEmail,
+    useSendPasswordResetEmail
 } from "react-firebase-hooks/auth";
-import auth from "../../../firebase.init";
+import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
+import auth from "../../../firebase.init";
+import "./ResetPassword.css";
 
 const ResetPassword = () => {
   const [sendPasswordResetEmail, sending, error] =
@@ -50,7 +50,7 @@ const ResetPassword = () => {
             {sending ? (
               <button className="btn w-100 reset-btn" disabled>
                 <span
-                  class="spinner-border spinner-border-sm"
+                  className="spinner-border spinner-border-sm"
                   role="status"
                   aria-hidden="true"
                 ></span>
@@ -61,6 +61,13 @@ const ResetPassword = () => {
                 Send Email Verification Link
               </button>
             )}
+            <Link
+              to="/login"
+              className="text-dark text-decoration-none fw-bold mt-3 d-block text-center"
+            >
+             Go Back to{" "}
+              <span style={{ color: " #2ecc71" }}>Login</span>
+            </Link>
           </form>
         </div>
       </div>

@@ -1,0 +1,25 @@
+.specialty .item {
+    height: 350px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 0;
+}
+.specialty .item .content {
+    padding: 30px 0px;
+    text-align: center;
+    color: #000;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(238, 238, 238, 0.816);
+}
+.specialty .item-1{
+    background-image: url('../../../images/specialty-1.webp');
+}
+.specialty .item-2{
+    background-image: url('../../../images/specialty-2.webp');
+}
+.specialty .item-3{
+    background-image: url('../../../images/specialty-3.webp');
+}

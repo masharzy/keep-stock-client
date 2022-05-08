@@ -1,22 +1,25 @@
 // import axios from "axios";
-import React, { useEffect } from "react";
-import { useForm } from "react-hook-form";
-// import Swal from "sweetalert2";
-import loginImg from "../../../images/login.webp";
-import "./Login.css";
+import {
+  faArrowRight,
+  faEnvelope,
+  faLock,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
-import { faLock } from "@fortawesome/free-solid-svg-icons";
-import googleImg from "../../../images/Google.svg";
+import axios from "axios";
+import React, { useEffect } from "react";
 import {
   useAuthState,
   useSignInWithEmailAndPassword,
   useSignInWithGoogle,
 } from "react-firebase-hooks/auth";
-import auth from "../../../firebase.init";
+import { useForm } from "react-hook-form";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { useLocation, useNavigate } from "react-router-dom";
-import Loading from "../../Shared/Loading/Loading";
+import auth from "../../../firebase.init";
+import googleImg from "../../../images/Google.svg";
+// import Swal from "sweetalert2";
+import loginImg from "../../../images/login.webp";
+import "./Login.css";
 
 const Login = () => {
   const [signInWithEmailAndPassword, emailUser, emailLoading, emailError] =
@@ -24,13 +27,25 @@ const Login = () => {
   const [signInWithGoogle, googleUser, googleLoading, googleError] =
     useSignInWithGoogle(auth);
   const [user] = useAuthState(auth);
+  const location = useLocation();
+  const from = location.state?.from || { pathname: "/" };
+  const navigate = useNavigate();
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm();
   const onSubmit = async (data) => {
-    await signInWithEmailAndPassword(data.email, data.password);
+    const { email, password } = data;
+    await signInWithEmailAndPassword(email, password);
+    await axios
+      .post("http://localhost:5000/login", { email })
+      .then((response) => {
+        if (response.data.token) {
+          localStorage.setItem("token", response.data.token);
+          navigate(from);
+        }
+      });
   };
 
   useEffect(() => {
@@ -53,12 +68,9 @@ const Login = () => {
       toast.error(newErrorMessage);
     }
   }, [emailError, googleError]);
-  const location = useLocation();
-  const from = location.state?.from || { pathname: "/" };
-  const navigate = useNavigate();
-  if (user) {
-    navigate(from);
-  }
+  // if (user) {
+  //   navigate(from);
+  // }
   return (
     <div className="container-fluid bg-dark login-container">
       <div className="row">
@@ -103,7 +115,7 @@ const Login = () => {
             {emailLoading ? (
               <button className="btn w-100 login-btn" disabled>
                 <span
-                  class="spinner-border spinner-border-sm"
+                  className="spinner-border spinner-border-sm"
                   role="status"
                   aria-hidden="true"
                 ></span>
@@ -127,7 +139,7 @@ const Login = () => {
               >
                 <div className="btn google-login-btn">
                   <span
-                    class="spinner-border spinner-border-sm"
+                    className="spinner-border spinner-border-sm"
                     role="status"
                     aria-hidden="true"
                   ></span>
@@ -144,6 +156,20 @@ const Login = () => {
                 </div>
               </div>
             )}
+            <div className="d-flex justify-content-between mt-3">
+              <Link
+                to="/register"
+                className="text-dark text-decoration-none fw-bold"
+              >
+                Create an Account <FontAwesomeIcon icon={faArrowRight} />
+              </Link>
+              <Link
+                to="/reset-password"
+                className="text-dark text-decoration-none fw-bold"
+              >
+                Reset Password
+              </Link>
+            </div>
           </form>
         </div>
       </div>
