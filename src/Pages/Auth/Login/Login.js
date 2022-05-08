@@ -1,16 +1,16 @@
 // import axios from "axios";
 import {
-    faArrowRight,
-    faEnvelope,
-    faLock
+  faArrowRight,
+  faEnvelope,
+  faLock,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import React, { useEffect } from "react";
 import {
-    useAuthState,
-    useSignInWithEmailAndPassword,
-    useSignInWithGoogle
+  useAuthState,
+  useSignInWithEmailAndPassword,
+  useSignInWithGoogle,
 } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -27,9 +27,6 @@ const Login = () => {
   const [signInWithGoogle, googleUser, googleLoading, googleError] =
     useSignInWithGoogle(auth);
   const [user] = useAuthState(auth);
-  const location = useLocation();
-  const from = location.state?.from || { pathname: "/" };
-  const navigate = useNavigate();
   const {
     register,
     formState: { errors },
@@ -41,12 +38,18 @@ const Login = () => {
     await axios
       .post("https://keep-stock-server.herokuapp.com/login", { email })
       .then((response) => {
-        if (response.data.token) {
-          localStorage.setItem("token", response.data.token);
-          navigate(from);
-        }
+        localStorage.setItem("token", response.data.token);
       });
   };
+
+  const location = useLocation();
+  const from = location.state?.from || { pathname: "/" };
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (user) {
+      navigate(from);
+    }
+  });
 
   useEffect(() => {
     if (emailError || googleError) {

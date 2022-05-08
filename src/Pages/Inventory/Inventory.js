@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
+import "./Inventory.css";
 
 const Inventory = () => {
   const { id } = useParams();
@@ -14,19 +15,23 @@ const Inventory = () => {
   const { image, name, price, quantity, description, supplierName, _id } =
     itemInfo;
   const handleDelivered = async () => {
-    await axios
-      .put(`https://keep-stock-server.herokuapp.com/item/${id}`, {
-        quantity: itemInfo.quantity - 1,
-      })
-      .then((response) => {
-        if (response.data.modifiedCount > 0) {
-          setItemInfo({ ...itemInfo, quantity: itemInfo.quantity - 1 });
-          toast("Successfully Delivered !!", {
-            type: "success",
-            draggable: true,
-          });
-        }
-      });
+    if (quantity === 0) {
+      toast.error("No more quantity available");
+    } else {
+      await axios
+        .put(`https://keep-stock-server.herokuapp.com/item/${id}`, {
+          quantity: itemInfo.quantity - 1,
+        })
+        .then((response) => {
+          if (response.data.modifiedCount > 0) {
+            setItemInfo({ ...itemInfo, quantity: itemInfo.quantity - 1 });
+            toast("Successfully Delivered !!", {
+              type: "success",
+              draggable: true,
+            });
+          }
+        });
+    }
   };
   const handleAddStockQuantity = (e) => {
     e.preventDefault();
@@ -48,8 +53,9 @@ const Inventory = () => {
   return (
     <div className="container">
       <div className="row align-items-center">
-        <div className="col-md-4">
+        <div className="col-md-4 item-image">
           <img className="w-100" src={image} alt="" />
+          {quantity === 0 ? <h6 className="sold-out">Sold <br /> Out</h6> : ""}
         </div>
         <div className="col-md-8">
           <table className="table table-bordered">
@@ -86,15 +92,15 @@ const Inventory = () => {
           >
             Delivered
           </button>
-          <Link
-          to='/manageInventories'
-            className="btn btn-primary ms-2"
-          >
+          <Link to="/manageInventories" className="btn btn-primary ms-2">
             Manage Inventories
           </Link>
         </div>
-        <h3 className="mt-4 mb-3 text-center">Add Stock Quantity</h3>
-        <form onSubmit={handleAddStockQuantity} className="col-md-4 mx-auto mb-3">
+        <h3 className="mt-4 mb-3 text-center">Restock Quantity</h3>
+        <form
+          onSubmit={handleAddStockQuantity}
+          className="col-md-4 mx-auto mb-3"
+        >
           <div className="mb-3">
             <input
               type="number"

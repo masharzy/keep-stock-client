@@ -1,0 +1,17 @@
+.item-image{
+    position: relative;
+}
+.sold-out{
+    position: absolute;
+    top: 30px;
+    left: 50px;
+    width: 70px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #34495e;
+    color: #fff;
+    border-radius: 50%;
+    text-align: center;
+}

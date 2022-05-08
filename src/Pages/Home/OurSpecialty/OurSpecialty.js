@@ -16,14 +16,14 @@ const OurSpecialty = () => {
         <div className="col-md-4">
           <div className="card item item-2">
             <div className="card-body content">
-              <h5 className="card-title">Convenient & Quick</h5>
+              <h5 className="card-title">Freshly Picked</h5>
             </div>
           </div>
         </div>
         <div className="col-md-4">
           <div className="card item item-3">
             <div className="card-body content">
-              <h5 className="card-title">Convenient & Quick</h5>
+              <h5 className="card-title">A wide range of Products</h5>
             </div>
           </div>
         </div>

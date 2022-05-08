@@ -6,7 +6,8 @@ const ManageInventory = ({ item, handleDelete }) => {
   return (
     <div className="col-md-6 col-lg-3 col-12">
       <div className="card h-100">
-        <img src={image} alt="" />
+        <img src={image} className="item-image w-100" alt="" />
+        {quantity === 0 ? <h6 className="sold-out">Sold <br /> Out</h6> : ""}
         <div className="card-body">
           <h4 className="card-title" style={{ textTransform: "capitalize" }}>
             {name}

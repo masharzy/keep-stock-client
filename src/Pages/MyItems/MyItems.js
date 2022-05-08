@@ -6,7 +6,6 @@ import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import auth from "../../firebase.init";
 import MyItem from "../MyItem/MyItem";
-import Loading from "../Shared/Loading/Loading";
 import emptyStock from "../../images/empty-stock.png"
 
 const MyItems = () => {

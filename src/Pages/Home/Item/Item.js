@@ -7,7 +7,8 @@ const Item = ({ item }) => {
   return (
     <div className="col-md-6 col-lg-4 col-12">
       <div className="card h-100 text-center py-3">
-        <img className="w-75 mx-auto" src={image} alt="" />
+        <img className="w-75 mx-auto item-image" src={image} alt="" />
+        {quantity === 0 ? <h6 className="sold-out">Sold <br /> Out</h6> : ""}
         <div className="card-body">
           <h4 className="card-title" style={{ textTransform: "capitalize" }}>
             {name}
