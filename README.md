@@ -33,4 +33,4 @@ This is a simple inventory management system that will allow you to add, update,
 * [Font Awesome](https://fontawesome.com/)
 * [SweetAlert2](https://sweetalert2.github.io/)
 * [Swiper Js](https://swiperjs.com/)
-* [Google] (https://google.com/) 
+* [Google](https://google.com/) 
