@@ -5,6 +5,7 @@ import Testimonial from "../Testimonial/Testimonial";
 import OurSpecialty from "../OurSpecialty/OurSpecialty";
 import { Link } from "react-router-dom";
 import ExploreSolutions from "../ExploreSolutions/ExploreSolutions";
+import YouAreInControl from "../YouAreInControl/YouAreInControl";
 
 const Home = () => {
   return (
@@ -21,6 +22,7 @@ const Home = () => {
         </div>
       </div>
       <OurSpecialty />
+      <YouAreInControl/>
       <Testimonial />
     </div>
   );
